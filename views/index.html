@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>费用追踪器</title>
+    <link rel="stylesheet" href="css/index.css">
+
+
+</head>
+
+<body>
+    <h2>费用追踪器</h2>
+    <div class="container">
+        <h4>你的余额:</h4>
+        <span id="balance">${{person.balance}}</span>
+        <div class="inc-cost-container">
+            <div class="money plus">
+                <h4>收入:</h4>
+                <p id="money-plus">${{person.income}}</p>
+            </div>
+            <div class="money minus">
+                <h4>消费:</h4>
+                <p id="money-minus">${{person.pay}}</p>
+            </div>
+        </div>
+        <h3>历史收入与消费记录:</h3>
+        <ul id="list" class="list">
+            {% for i in person.data %}
+
+            {%if i.sureBtn>=0 %}
+            <li class="plus">
+                {{i.text}}<span>{{i.sureBtn}}</span><span>{{i.time}}</span>
+                <button type="button" class="delete-btn" data-index="{{i.id}}">&times;</button>
+            </li>
+            {%else%}
+            <li class="minus">
+                {{i.text}}<span>{{i.sureBtn}}</span><span>{{i.time}}</span>
+                <button type="button" class="delete-btn" data-index="{{i.id}}">&times;</button>
+            </li>
+            {%endif%}
+
+            {%endfor%}
+        </ul>
+        <h3>添加新收入或新消费:</h3>
+        <form id="form">
+            <div class="form-control">
+                <label>收入来源或者交易内容</label>
+                <input type="text" placeholder="请输入收入来源或者交易内容" name="text" id="text">
+            </div>
+            <div class="form-control">
+                <label>金额<br>(负数为消费，正数为收入)</label>
+                <input type="number" id="amount" value="10" placeholder="请输入金额" name="sureBtn">
+            </div>
+            <input type="button" class="sureBtn" id="sureBtn" value="确定添加">
+
+        </form>
+    </div>
+    <script src="js/jQuery-1.12.4.js"></script>
+    <script src="js/index.js"></script>
+</body>
+
+
+</html>
